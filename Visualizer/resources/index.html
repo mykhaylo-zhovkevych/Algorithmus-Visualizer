@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Algorithmus-Visualizer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style02.css" />
+  </head>
+
+  <body>
+
+
+    <div popover="auto" id="menu">
+      <div class="content">
+
+        <!-- Popup Window mit Search und Links -->
+        <div class="content__content">
+          <div class="heading">
+            <input type="search" placeholder="What are you searching for?" />
+          </div>
+          <hr />
+          <div class="links">
+            <nav>
+              <h3>Links</h3>
+              ...
+              <h3>Socials</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://x.com/intent/follow?screen_name=jh3yy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg
+                      fill="currentColor"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>X</title>
+                      <path
+                        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+                      />
+                    </svg>
+                    <span>X</span>
+                  </a>
+                </li>
+
+                <li>
+                
+                </li>
+
+              
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <!-- Icons Transaction from Popup-->
+        <ul aria-hidden="true">
+          <!-- Home Html -->
+          <li style="--i: 0">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </li>
+          <!-- Dashboard Html -->
+          <li style="--i: 1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </li>
+          <!-- Archive html -->
+          <li style="--i: 2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"/><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 002-2v-6l-3.4-6.9A2 2 0 0016.8 4H7.2a2 2 0 00-1.8 1.1z"/></svg> 
+          </li>
+
+          <!-- Open/Close Button -->
+          <li style="--i: 4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Icons Outside static -->
+    <nav class="nav" aria-label="Main Navigation">
+        <ul>
+          <!-- Home Html-->
+          <li>
+            <a href="#" aria-label="Home">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </a>
+          </li>
+          
+          <!-- Dashboard Html -->
+          <li>
+            <a href="#" aria-label="Settings">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </a>
+          </li>
+          <!--  Archive Html -->
+          <li>
+            <a href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"/><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 002-2v-6l-3.4-6.9A2 2 0 0016.8 4H7.2a2 2 0 00-1.8 1.1z"/></svg>
+            </a>
+          </li>
+
+          <!-- Open/Close Menu Button -->
+          <li>
+            <button popovertarget="menu" popovertargetaction="toggle" aria-label="Open Menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+
+
+  <!-- diese Elemnet soll für erste SVG verantwörtlich sein -->
+  <!-- Home Html mit Begrüssung -->
+   
+    <div class="welcome-content">
+      <header>
+        <h1 class="fluid">Craft of UI</h1>
+        <p>
+          A well-crafted UI can turn a simple webpage into an interactive
+          journey, guiding users and creating memorable impressions through
+          thoughtful design and seamless motion. In web development, creating a
+          UI that’s visually appealing, responsive, and motion-driven requires a
+          blend of creativity, coding skills, and a deep understanding of user
+          needs.
+        </p>
+      </header>
+      <main>
+        <section id="user-centered-design" style="view-timeline: --one">
+          <div class="heading">
+            <h2>User-Centered Design</h2>
+            <a href="#user-centered-design">
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
+                />
+              </svg>
+              <span class="sr-only">Section: User-Centered Design</span>
+            </a>
+          </div>
+          <p>
+            User-centered design (UCD) is the backbone of effective UI in web
+            development. Every decision in the design process should revolve
+            around the user’s needs, behavior, and preferences. Conducting user
+            research, analyzing browsing habits, and testing prototypes are
+            essential steps for developing a web UI that’s intuitive and
+            enjoyable.
+          </p>
+          <p>
+            Understanding the end-user’s journey on the website can help
+            designers pinpoint where users might encounter difficulties or
+            confusion. Techniques like journey mapping and persona creation
+            enable designers to simulate the user's interactions, focusing
+            design improvements where they are most needed. Ultimately, a
+            user-centered approach leads to a more engaging and efficient
+            experience.
+          </p>
+          <p>
+            Additionally, iterative feedback loops involving user testing allow
+            designers to refine features, identify pain points, and ensure that
+            any updates align with user needs. This continuous improvement cycle
+            keeps the design relevant and responsive, adapting to changes in
+            user behavior and technological advancements.
+          </p>
+        </section>
+    
+        
+      </main>
+      <footer>ʕ◕ᴥ◕ʔ &copy; jhey '24</footer>
+
+
+    </div>
+    
+
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
