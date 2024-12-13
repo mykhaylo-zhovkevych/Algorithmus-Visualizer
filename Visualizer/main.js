@@ -9,7 +9,7 @@ function createWindow() {
     minWidth: 1280,  
     minHeight: 720,  
     frame: true,
-    autoHideMenuBar: true, // Hide the system menu bar
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true
     }

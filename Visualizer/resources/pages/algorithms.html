@@ -45,7 +45,7 @@
       .main ul::after {
         content: "";
         display: block;
-        width: var(--card-width); /* Gleiche Breite wie Artikel */
+        width: var(--card-width); 
         flex-shrink: 0;
         margin-left: 30rem;
       }
@@ -53,7 +53,7 @@
       .main ul::before {
         content: "";
         display: block;
-        width: var(--card-width); /* Gleiche Breite wie Artikel */
+        width: var(--card-width);
         flex-shrink: 0;
       }
 
@@ -63,7 +63,6 @@
           margin: 0;
       }
       
-      /* Basis-Stile für Artikel */
       article {
         width: var(--card-width);
         height: var(--card-height);
@@ -71,14 +70,13 @@
         background: radial-gradient(var(--bg), var(--bg));
         box-shadow: 0 1px hsl(0 0% 100% / 0.5) inset, 0 10px 10px -10px var(--bg);
         border-radius: 21px;
-        overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers angezeigt wird */
-        transition: all 0.5s ease; /* Für sanfte Übergänge */
-        cursor: pointer; /* Damit der Artikel wie ein klickbares Element aussieht */
+        overflow: hidden;
+        transition: all 0.5s ease;
+        cursor: pointer; 
         margin: 2rem;
       }
 
-       
-        /* Versteckter Inhalt (z.B. mehr Text oder Bilder) */
+
         .article-content {
           display: none;
         }
@@ -133,21 +131,20 @@
       height: 10px; 
       }
       ::-webkit-scrollbar-track {
-      background: var(--color); /* Farbe des Tracks */
-      border-radius: 100px; /* Abgerundete Ecken */
+      background: var(--color); 
+      border-radius: 100px;
       }
       
       ::-webkit-scrollbar-thumb {
-      background: linear-gradient(45deg, var(--bg), var(--bg)); /* Verlauf */
-      border-radius: 100px; /* Abgerundete Ecken */
-      border: 1px solid transparent; /* Platz zwischen Thumb und Track */
+      background: linear-gradient(45deg, var(--bg), var(--bg));
+      border-radius: 100px; 
+      border: 1px solid transparent; 
       }
       
       ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(45deg, var(--bg02), var(--bg02)); /* Dunklere Farbe bei Hover */
+      background: linear-gradient(45deg, var(--bg02), var(--bg02)); 
       }
       
-      /* Popup-Styles */
       .popup {
       position: fixed;
       top: 0;

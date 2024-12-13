@@ -8,7 +8,6 @@ const config = {
 };
 
 
-// Container für die Panes
 const paneContainer = document.createElement('div');
 paneContainer.classList.add('pane-container');
 document.body.appendChild(paneContainer);
@@ -19,20 +18,17 @@ const ctrl = new Pane({
     expanded: true,
 });
 
-// Erstelle das zweite Fenster
 const secondWindow = new Pane({
     title: 'Config Algorithm',
     expanded: false,
 });
 
-// Erstelle das dritte Fenster
 const thirdWindow = new Pane({
     title: 'Config ...',
     expanded: false,
 });
 
 
-// Füge die Pane-Elemente zum Container hinzu
 paneContainer.appendChild(ctrl.element);
 paneContainer.appendChild(secondWindow.element);
 paneContainer.appendChild(thirdWindow.element);
@@ -89,7 +85,6 @@ if (pop) {
 }
 
 
-// Event-Listener für Hash-Änderungen
 window.addEventListener('hashchange', handleNavigation);
 window.addEventListener('load', handleNavigation);
 
@@ -114,7 +109,6 @@ themeToggler.addEventListener('click', () => {
 });
  */
 
-// Dynamisches Laden externer HTML-Dateien mit Animation
 function loadPageContent(page) {
   const tl = gsap.timeline();
 
@@ -135,7 +129,7 @@ function loadPageContent(page) {
       })
       .then((html) => {
         container.innerHTML = html;
-        initArticleExpansion(); // Funktion zur Initialisierung der Expansion von Artikeln
+        initArticleExpansion();
         gsap.fromTo(
           container,
           { opacity: 0, scale: 0.95, x: 50 },
@@ -180,10 +174,8 @@ function scrollToCenter(article) {
     const articleWidth = article.offsetWidth;
     console.log(articleWidth);
 
-    // Berechnung: Zentriere das Artikel-Element
     const scrollPosition = articleLeft - (containerWidth / 14 ) ;
 
-    // Smooth Scrolling zur berechneten Position
     container.scrollTo({
       left: scrollPosition,
       behavior: "smooth",
@@ -191,22 +183,21 @@ function scrollToCenter(article) {
   }
 }
 
-// Initialisierung der Artikel-Interaktion
+
 function initArticleExpansion() {
   const articles = document.querySelectorAll("article");
 
   articles.forEach((article) => {
     article.addEventListener("click", () => {
-      // Vergrößern/Verkleinern des Artikels
+
       const isExpanded = article.style.height === "90vh";
 
       gsap.to(article, {
         duration: 0.5,
-        height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh", // Toggle height
-        width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",  // Toggle width
+        height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh", 
+        width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",  
         ease: "power2.in",
         onComplete: () => {
-          // Scrollen, sobald die Animation abgeschlossen ist
           if (!isExpanded) scrollToCenter(article);
         },
       });
@@ -215,10 +206,9 @@ function initArticleExpansion() {
 }
 
 
-// Routing-Logik
 function handleNavigation() {
-  const hash = window.location.hash.slice(1); // Entferne das "#"
-  const page = hash || 'home'; // Standard ist 'home'
-  console.log(`Navigiere zu Seite: ${page}`); // Debug-Ausgabe
+  const hash = window.location.hash.slice(1); 
+  const page = hash || 'home';
+  console.log(`Navigiere zu Seite: ${page}`);
   loadPageContent(page);
 }

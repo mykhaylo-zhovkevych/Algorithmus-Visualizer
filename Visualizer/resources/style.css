@@ -370,8 +370,6 @@
     }
 
     [popover] [aria-hidden] li {
-        /* let's say the speed is 20% and has to be done by 75% */
-        /* Your delay window is 55% which you can split using sin() for a curve */
         --speed: calc(var(--transition) * 0.7);
         --delay: calc(sin((var(--i) / 6) * 45deg) * (var(--speed) * 1));
         transition-property: opacity, translate, filter;
@@ -518,7 +516,6 @@
         width: 75%;
     }
 
-    /* Utilities */
     .sr-only {
         position: absolute;
         width: 1px;
