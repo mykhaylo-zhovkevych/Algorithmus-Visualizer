@@ -192,10 +192,6 @@
         );
     }
 
-    li svg {
-        width: 24px;
-    }
-
     [popover] {
         transition-property: display, overlay, width, height, border-radius;
         transition-duration: var(--transition);

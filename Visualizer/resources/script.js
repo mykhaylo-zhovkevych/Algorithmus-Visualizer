@@ -4,7 +4,7 @@ const container = document.getElementById('page-container');
 const config = {
     speed: 0.50,
     backdrop: true,
-    theme: 'light',
+    theme: 'system',
 };
 
 
@@ -174,7 +174,7 @@ function scrollToCenter(article) {
     const articleWidth = article.offsetWidth;
     console.log(articleWidth);
 
-    const scrollPosition = articleLeft - (containerWidth / 14 ) ;
+    const scrollPosition = articleLeft - (containerWidth / 16 ) ;
 
     container.scrollTo({
       left: scrollPosition,
@@ -189,20 +189,45 @@ function initArticleExpansion() {
 
   articles.forEach((article) => {
     article.addEventListener("click", () => {
-
       const isExpanded = article.style.height === "90vh";
 
       gsap.to(article, {
         duration: 0.5,
-        height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh", 
-        width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",  
+        height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
+        width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",
         ease: "power2.in",
         onComplete: () => {
-          if (!isExpanded) scrollToCenter(article);
+          if (!isExpanded) {
+            scrollToCenter(article); 
+            createD3Canvas(article); 
+          }
         },
       });
     });
   });
+}
+
+
+
+function createD3Canvas(article) {
+
+  if (article.querySelector("svg")) return;
+
+  // console.log(`Canvas wird für Artikel erstellt: ${article.textContent}`);
+
+
+  const svg = d3.select(article)
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "90%")
+    .style("background-color", "#FFFFFF");
+
+
+  svg.append("circle")
+    .attr("cx", 100)
+    .attr("cy", 100)
+    .attr("r", 50)
+    .style("fill", "steelblue");
 }
 
 
