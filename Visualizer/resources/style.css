@@ -15,6 +15,7 @@
 
     :root {
         --bg: color-mix(in hsl, canvas 8%, canvasText);
+        --bg02: color-mix(in hsl, canvas 45%, canvasText);
         --color: color-mix(in hsl, canvas 92%, canvasText);
     }
 
@@ -36,7 +37,7 @@
         linear-gradient(white, black) border-box;
         border: 1px solid transparent;
         transition: opacity 0s var(--transition);
-        z-index: 100;
+        z-index: 1;
     }
 
     body:has(:popover-open) .nav {
@@ -68,9 +69,8 @@
     [popover] [aria-hidden],
     .nav ul {
         display: flex;
-        gap: 0.5rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        gap: 4px;
+        padding: 0;
         margin: 0;
         list-style-type: none;
     }
@@ -203,10 +203,12 @@
         transition-timing-function: var(--ease);
         translate: -50% 0;
         padding: 0;
-        clip-path: inset(0 0 0 0 round 21px);
+        /* clip-path: inset(0 0 0 0 round 21px); */
         box-shadow: 0 4px 8px 0 hsl(0 0% 0% / 0.2);
+
         bottom: anchor(bottom);
         left: anchor(left);
+
         width: anchor-size(width);
         height: anchor-size(height);
         border-radius: 21px;
@@ -357,7 +359,7 @@
 
     [popover]:popover-open {
         width: min(var(--width), 100vw - 2rem);
-        height: 50vh;
+        height: min(var(--height), 80vh);
         border-radius: 21px;
 
         @starting-style {
@@ -366,7 +368,6 @@
             border-radius: 21px;
         }
     }
-
 
     [popover] [aria-hidden] li {
         /* let's say the speed is 20% and has to be done by 75% */
@@ -472,6 +473,7 @@
         min-height: 100vh;
         font-family: 'SF Pro Text', 'SF Pro Icons', 'AOS Icons', 'Helvetica Neue',
         Helvetica, Arial, sans-serif, system-ui;
+        overflow: hidden;
     }
 
     body::before {
@@ -576,7 +578,7 @@
     opacity: 1;
 }
 @starting-style {
-    [data-backdrop='true'] .teil02 [popover]:popover-open::backdrop {
+    [data-backdrop='true'] [popover]:popover-open::backdrop {
         opacity: 0;
     }
 }
@@ -602,12 +604,4 @@
     background: linear-gradient(var(--bg), var(--bg)) padding-box,
                 linear-gradient(white, black) border-box;
     transition: opacity 0s var(--transition), background-color 0.3s ease;
-}
-
-.welcome-content {
-    width: 100vw;
-    height: 100svh;
-    overflow: auto;
-    padding-block: 80px;
-    mask: linear-gradient(#0000, #fff 10rem calc(80% - 20rem), #0000);
 }

@@ -119,3 +119,22 @@
 }
 
 
+.welcome-content {
+  width: auto;
+  height: 100svh;
+  overflow-y: auto; /* Ermöglicht Scrollen nur im Container */
+  padding-block: 80px;
+  mask: linear-gradient(#0000, #fff 10rem calc(80% - 20rem), #0000);
+
+}
+
+.welcome-content {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+.welcome-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari und andere WebKit-basierte Browser */
+}
+
+

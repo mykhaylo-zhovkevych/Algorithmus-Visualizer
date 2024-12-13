@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+  
+    <style>*,
+      *:after,
+      *:before {
+          box-sizing: border-box;
+      }
+      
+      :root {
+        --card-width: clamp(300px, 50vmin, 600px);
+        --card-height: clamp(200px, 50vmin, 400px);
+        --bg: color-mix(in hsl, canvas 8%, canvasText);
+        --bg02: color-mix(in hsl, canvas 45%, canvasText);
+        --color: color-mix(in hsl, canvas 92%, canvasText);
+      }
+      
+      .main {
+        width: 100vw;
+        position: relative;
+        height: 100vh;
+      }
+      
+      .main ul {
+        display: flex;
+        width: max-content;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+        list-style-type: none;
+        overflow: auto;
+        height: 100vh;
+           align-content: center;
+           align-items: center;
+           scroll-behavior: smooth;
+           scroll-padding-inline: calc(50vw - (var(--card-width) * 0.5));
+      }
+      
+      .main ul::after {
+        content: "";
+        display: block;
+        width: var(--card-width); /* Gleiche Breite wie Artikel */
+        flex-shrink: 0;
+        margin-left: 30rem;
+      }
+
+      .main ul::before {
+        content: "";
+        display: block;
+        width: var(--card-width); /* Gleiche Breite wie Artikel */
+        flex-shrink: 0;
+      }
+
+      li {
+          scroll-snap-align: center;
+          padding: 0;
+          margin: 0;
+      }
+      
+      /* Basis-Stile für Artikel */
+      article {
+        width: var(--card-width);
+        height: var(--card-height);
+        aspect-ratio: 4 / 3;
+        background: radial-gradient(var(--bg), var(--bg));
+        box-shadow: 0 1px hsl(0 0% 100% / 0.5) inset, 0 10px 10px -10px var(--bg);
+        border-radius: 21px;
+        overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers angezeigt wird */
+        transition: all 0.5s ease; /* Für sanfte Übergänge */
+        cursor: pointer; /* Damit der Artikel wie ein klickbares Element aussieht */
+        margin: 2rem;
+      }
+
+       
+        /* Versteckter Inhalt (z.B. mehr Text oder Bilder) */
+        .article-content {
+          display: none;
+        }
+
+        .article-expanded .article-content {
+          display: block;
+        }
+
+      
+      /*  .track__indicators {
+          height: 20px;
+          position: absolute;
+          top: calc(50% + ((var(--card-width) * (3 / 4)) * 0.5) + 2rem);
+          left: 50%;
+          translate: -50% 0;
+          display: flex;
+        opacity: 0.5;
+      }
+      .indicator {
+          --color: hsl(var(--hue, 0) 0% 70%);
+          background: linear-gradient(var(--color), var(--color)) padding-box;
+          flex: 1;
+          border-radius: 100px;
+          height: 100%;
+          min-width: 20px;
+          cursor: pointer;
+          padding: 0;
+        position: relative;
+          border: 4px solid transparent;
+      }
+      */
+      
+      body::before {
+         
+        --size: 60px;
+          content: "";
+          height: 100vh;
+          width: 100vw;
+          position: fixed;
+          background:
+              linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size),
+              linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size);
+          mask: linear-gradient(-15deg, transparent 30%, rgb(255, 0, 0));
+          top: 0;
+          z-index: -1;
+          transform: translate3d(0, 0, -100vmin);
+      } 
+      
+      
+      ::-webkit-scrollbar {
+      width: auto; 
+      height: 10px; 
+      }
+      ::-webkit-scrollbar-track {
+      background: var(--color); /* Farbe des Tracks */
+      border-radius: 100px; /* Abgerundete Ecken */
+      }
+      
+      ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, var(--bg), var(--bg)); /* Verlauf */
+      border-radius: 100px; /* Abgerundete Ecken */
+      border: 1px solid transparent; /* Platz zwischen Thumb und Track */
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, var(--bg02), var(--bg02)); /* Dunklere Farbe bei Hover */
+      }
+      
+      /* Popup-Styles */
+      .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      }
+      
+      .popup-content {
+      background: var(--bg);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      color: var(--color);
+      }
+      
+      .close-btn {
+      background: var(--bg02);
+      color: var(--color);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-size: 1rem;
+      }
+      
+      .close-btn:hover {
+      background: var(--bg);
+      }
+      </style>
+
+   
+</head>
+<body>
+
+  <div class="main">
+      <div class="horizontal-sliders">
+        <ul>
+          <li id="one" class="slide">
+            <article></article>
+          </li>
+          <li id="two" class="slide">
+            <article></article>
+          </li>
+          <li id="three" class="slide">
+            <article></article>
+          </li>
+          <li id="four" class="slide">
+            <article></article>
+          </li>
+          <li id="five" class="slide">
+            <article></article>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+
+</body>
+</html>
