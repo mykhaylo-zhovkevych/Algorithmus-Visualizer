@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>*,
       *:after,
@@ -42,19 +44,32 @@
       }
       
       .main ul::after {
-        content: "";
-        display: block;
-        width: var(--card-width); 
-        flex-shrink: 0;
-        margin-left: 30rem;
-      }
-
-      .main ul::before {
-        content: "";
-        display: block;
+        content: "This is the start lorem >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>";
+        text-align: center;
+        color: var(--bg);
+        font-size: 1.5rem;
+        display: flex;
         width: var(--card-width);
         flex-shrink: 0;
-      }
+        /* flex-direction: column; */
+        margin: 10rem;
+        inline-size: rem;
+        flex-wrap: wrap;
+    }
+
+      .main ul::before {
+        content: "This is the start lorem >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>";
+        text-align: center;
+        color: var(--bg);
+        font-size: 1.5rem;
+        display: flex;
+        width: var(--card-width);
+        flex-shrink: 0;
+        /* flex-direction: column; */
+        margin: 10rem;
+        inline-size: rem;
+        flex-wrap: wrap;
+    }
 
       li {
           scroll-snap-align: center;
@@ -197,6 +212,41 @@
         margin-bottom: 1rem;
       }
 
+
+      .bar {
+        border: 1px solid black;
+        flex: 1; /* Balkenbreite */
+        transition: height 0.5s ease; /* Animation für Höhenänderung */
+      }
+
+      
+      
+      .bar:hover {
+        background-color: orange; /* Farbe beim Hover */
+      }
+
+
+
+      .article-user {
+
+        width: var(--card-width);
+        height: var(--card-height);
+        aspect-ratio: 4 / 3;
+        background: radial-gradient(var(--color), var(--color));
+        box-shadow: 0 1px var(--color), 0 10px 10px -10px var(--color);
+        border-radius: 21px;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        margin: 2rem;
+        padding: 2rem;
+        color: var(--bg); 
+
+      }
+
+
+
+
       </style>
 
    
@@ -206,6 +256,17 @@
   <div class="main">
       <div class="horizontal-sliders">
         <ul>
+
+          <li id="zero" class="slide">
+            <article class="article-user">
+              <div class="info-article">
+                <h1>Sortieralgorithmus 00</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
+                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+              </div>
+            </article>
+          </li>
+
           <li id="one" class="slide">
             <article>
               <div class="info-article">
