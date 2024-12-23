@@ -40,9 +40,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://127.0.0.3:5500")
-                        .allowedMethods("GET", "POST") 
-                        .allowedHeaders("*"); // Alle Header zulassen
+                        .allowedOrigins("http://127.0.0.3:5500", "http://localhost")
+                        .allowedMethods("GET", "POST")
+                        .allowedHeaders("*");
+
             }
         };
     }

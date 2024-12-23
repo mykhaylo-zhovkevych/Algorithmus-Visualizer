@@ -1,9 +1,11 @@
 import { Pane } from 'https://cdn.skypack.dev/tweakpane@4.0.4';
 
-
+// Die Root-Page holder 
 const container = document.getElementById('page-container');
+
 const config = {
     speed: 0.50,
+    algoSpeed: 1.20,
     backdrop: true,
     theme: 'system',
 };
@@ -13,7 +15,8 @@ const paneContainer = document.createElement('div');
 paneContainer.classList.add('pane-container');
 document.body.appendChild(paneContainer);
 
-
+// Objketoretiert Paradigm
+// Hier wird jede Pane repräsentiert eine separates Window
 const ctrl = new Pane({
     title: 'Config App',
     expanded: true,
@@ -29,28 +32,36 @@ const thirdWindow = new Pane({
     expanded: false,
 });
 
-
+// Dynamische Hinzufügen von Elementen in den DOM 
 paneContainer.appendChild(ctrl.element);
 paneContainer.appendChild(secondWindow.element);
 paneContainer.appendChild(thirdWindow.element);
 
-
+// FP reine Funktion, die den globalen Zustand der App synchronisiert
+// Ziel von diese Funktion ist die User-App mit code config zu synchronisiert
 const update = () => {
     document.documentElement.dataset.theme = config.theme
     document.documentElement.dataset.backdrop = config.backdrop
-    document.documentElement.style.setProperty('--speed', config.speed)
+    document.documentElement.style.setProperty('--speed', config.speed);
+    document.documentElement.style.setProperty('--algo-speed', config.algoSpeed);
     
 };
 
+// Event-gesteuerte Paradigma
+// Kein Teil von FP, aber nutzte die Konzepte die: reihen Funktionen und Callbacks 
+// Ziel ist, dass wenn User wählt andere Themen es wird updated
 const sync = (event) => {
     if (
         !document.startViewTransition ||
         event.target.controller.view.labelElement.innerText !== 'Theme'
     )
         return update();
-    document.startViewTransition(() => update());
+                                // Callback
+  document.startViewTransition(() => update());
 };
 
+// Objektorientiertes Paradigma
+// verbindet Properties des Objekts "config" mit UI Elementen 
 ctrl.addBinding(config, 'speed', {
     label: 'Speed(s)',
     min: 0.2,
@@ -71,12 +82,34 @@ ctrl.addBinding(config, 'theme', {
     },
 });
 
+secondWindow.addBinding(config, 'algoSpeed', {
+  label: 'Algorithm Speed (s)',
+  min: 0.1,
+  max: 2,
+  step: 0.01,
+});
 
+// Fügt einen Button hinzu, um eine spezifische URL (mit Hash) zu laden
+secondWindow.addButton({
+  title: 'Reload Page',
+}).on('click', () => {
+  const targetHash = '#algorithms';
+  if (window.location.hash !== targetHash) {
+      window.location.hash = targetHash;
+  } else {
+      // Wenn der Hash bereits gesetzt ist, manuell das Event triggern
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+});
+
+
+// Sorgt dafür dass jede änderung zuert synchronisiert wird und dann updated
 ctrl.on('change', sync);
 update();
 
 const pop = document.querySelector('[popover]');
 if (pop) {
+  // Fügt die pop zu toggle Event hinzu. Das toggle Event wird ausgelöst, wenn sich der Zustand des Popovers ändert 
     pop.addEventListener('toggle', async (event) => {
         if (event.newState === 'open') {
             await Promise.allSettled(pop.getAnimations().map((a) => a.finished));
@@ -85,11 +118,13 @@ if (pop) {
     });
 }
 
-
+// Das ist ein Even-Listener für das Hashchange Event, der wird ausgelöst, wenn sich der URL (# Teil der URL) ändert.
 window.addEventListener('hashchange', handleNavigation);
+// Diese Event ist ausgelöst, wenn ganze page loaded
 window.addEventListener('load', handleNavigation);
 
-/* const themeToggler = document.querySelector('.theme-toggler');
+/* 
+const themeToggler = document.querySelector('.theme-toggler');
 themeToggler.addEventListener('click', () => {
     const options = ['system', 'light', 'dark'];
     const index = options.indexOf(config.theme);
@@ -108,11 +143,14 @@ themeToggler.addEventListener('click', () => {
         },
     });
 });
- */
+*/
 
+// FP Funktion zum Laden des Seiteninhalts indem sie eine Promise zurückgibt
+// Die Funktion nutzt fetch-methode, um asynchron Daten zu holen und verarbeitet deise Daten, ohne den Zustand auuserhalb der Funktion zu verändern(bis auf das DOM, was als Seiteneffekt angesehen wird)
 function loadPageContent(page) {
   const tl = gsap.timeline();
 
+  // Animation für Transaktion zwischen Containers 
   tl.to(container, {
     duration: 0.8,
     opacity: 0,
@@ -144,7 +182,7 @@ function loadPageContent(page) {
         );
       })
       .catch(() => {
-        container.innerHTML = '<p>404 - Seite nicht gefunden</p>';
+        container.innerHTML = '<h1>404 - Seite nicht gefunden</h1>';
         gsap.fromTo(
           container,
           { opacity: 0, scale: 0.95, y: -50 },
@@ -158,13 +196,12 @@ function loadPageContent(page) {
         );
         article.scrollIntoView({
           behavior: "smooth", 
-       
         });
-
       });
   });
 }
 
+// Funktion zum Scrollen des Artikels in die Mitte des Containers
 function scrollToCenter(article) {
   const container = document.querySelector(".main ul");
   
@@ -183,6 +220,7 @@ function scrollToCenter(article) {
   }
 }
 
+// Array mit den URLs der Artikel
 const articleURLs = [
   { id: 0, url: 'http://localhost:8080/api/userchoice' },
   { id: 1, url: 'http://localhost:8080/api/bubblesort' }, 
@@ -190,14 +228,12 @@ const articleURLs = [
   { id: 3, url: 'http://localhost:8080/api/mergesort' },
   { id: 4, url: 'http://localhost:8080/api/insertionsort' },
   { id: 5, url: 'http://localhost:8080/api/selectionsort' }
-
 ];
-
-
 
 function initArticleExpansion() {
   const articles = document.querySelectorAll("article");
 
+  // Füge einen Klick-Listener für jeden Artikel hinzu
   articles.forEach((article, index) => {
     article.addEventListener("click", async () => {
       const articleId = articleURLs[index]?.id; 
@@ -207,23 +243,21 @@ function initArticleExpansion() {
         console.error(`Keine URL für Artikel ${index} gefunden`);
         return;
       }
-
       await handleArticleExpansion(article, url, articleId); 
     });
   });
 }
 
-  async function handleArticleExpansion(article, url, articleId) {
+async function handleArticleExpansion(article, url, articleId) {
 
-    const isExpanded = article.style.height === "90vh";
-
+  const isExpanded = article.style.height === "90vh";
 
   const isInputOrButtonClicked = event.target.closest('button, input, .circle'); 
   console.log(isInputOrButtonClicked);
   if (isInputOrButtonClicked) {
+     // Beende die Funktion, wenn ein Button oder Input geklickt wurde
     return; 
   }
-  
 
   if (articleId === 0) {
     gsap.to(article, {
@@ -239,7 +273,6 @@ function initArticleExpansion() {
       }
     });
   } else {
-
     gsap.to(article, {
       duration: 0.5,
       height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
@@ -255,55 +288,135 @@ function initArticleExpansion() {
   }
 }
 
+// Funktion zum Senden der Benutzereingabe an den Server 
+async function sendUserChoice(algorithm, array) {
+  try {
+    const response = await fetch('http://localhost:8080/api/userchoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        algorithm: algorithm,
+        unsortedArray: array,
+      }),
+    });
+  
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Fehler: ${response.status} - ${errorText}`);
+    }
 
+    const data = await response.json();
+    console.log('Daten erfolgreich gesendet:', data);
+    return data;
+  } catch (error) {
+    console.error('Fehler beim Senden der Benutzerauswahl:', error);
+    // Erneutes Werfen des Fehlers für die aufrufende Funktion
+    throw error; 
+  }
+}
+
+async function visualizeUserChoice(steps, article) {
+  // Debugging statement
+  // console.log('Visualizing sorting steps:', steps); 
+
+  const interactiveUI = article.querySelector('.interactive-ui');
+  if (!interactiveUI) {
+    console.error('Interactive UI container not found.');
+    return;
+  }
+
+  const existingContainer = interactiveUI.querySelector('.visualization-container');
+  if (existingContainer) {
+    existingContainer.remove();
+  }
+
+  const container = d3.select(interactiveUI)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("align-items", "flex-end")
+    .style("gap", "5px")
+    .style("background-color", "#FFFFFF")
+    .style("border-radius", "21px");
+
+  // Debugging statement  
+  // console.log('Visualization container created:', container.node()); 
+
+  const bars = container.selectAll(".bar")
+    .data(steps[0])
+    .enter()
+    .append("div")
+    .classed("bar", true)
+    .style("background-color", "#121212")
+    .style("border", "1px solid black")
+    .style("flex", "1")
+    .style("height", d => `${(d / d3.max(steps[0])) * 90}%`);
+
+  for (let i = 0; i < steps.length - 1; i++) {
+    const currentStep = steps[i];
+    const nextStep = steps[i + 1];
+
+    const changedIndices = findChangedIndices(currentStep, nextStep);
+    await highlightComparison(bars, changedIndices);
+    updateBars(bars, nextStep);
+    await delay(500);
+  }
+}
+
+// Funktion zum Erstellen der interaktiven UI-Elemente
 function createInteractiveUI(article) {
   if (!article) {
     console.error("Das Article-Element konnte nicht gefunden werden.");
     return;
   }
 
-
+  // Verhindere doppelte UI-Erstellung
   if (article.querySelector(".interactive-ui")) {
     return; 
   }
 
-
+  // Erstelle ein neues UI-Element und füge es dem Artikel hinzu
   const container = document.createElement("div");
   container.classList.add("interactive-ui");
 
   container.innerHTML = `
     <div class="container_circles">
-    <div class="circle circle1">Circle 1</div>
-    <div class="circle circle2">Circle 2</div>
-    <div class="circle circle3">Circle 3</div>
-
-  </div>
-
-  <div class="preloader">
-    <div></div>
-  </div>
+      ${['Merge Sort', 'Quick Sort', 'Bubble Sort', 'Selection Sort', 'Quick Sort', 'Insertion Sort']
+        .map((text, i) => `<div class="circle circle${i + 1}">${text}</div>`)
+        .join('')}
+    </div>
+    <div class="preloader">
+      <div></div>
+    </div>
   `;
 
   article.appendChild(container); 
 
-
   const style = document.createElement("style");
   style.innerHTML = `
+    :root {
+        --bg: color-mix(in hsl, canvas 8%, canvasText);
+        --bg02: color-mix(in hsl, canvas 45%, canvasText);
+        --color: color-mix(in hsl, canvas 92%, canvasText);
+    }
+
     .container_circles {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      height: 90vh;
-      background-color: #ececec;
+      height: 90%;
+      background-color: #FFFFFF;
       border-radius: 21px;
     }
 
     .circle {
       width: 50px;
       height: 50px;
-      background-color: #3498db;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -315,28 +428,56 @@ function createInteractiveUI(article) {
       text-align: center;
     }
 
+    .interactive-ui {
+          height: 100%;
+    }
+
     .circle1 {
-      background-color: #7752d5;
-      width: 240px;
-      height: 240px;
+      background-color: #000000; /* Tiefschwarz */
+      width: 200px;
+      height: 200px;
       margin-top: -120px;
       margin-left: -120px;
     }
-    
+
     .circle2 {
-      background-color: #8362d9;
+      background-color: #2a2a2a; /* Dunkles Grau */
       width: 170px;
       height: 170px;
-      margin-top: -85px;
-      margin-left: -85px;
+      margin-top: -100px;
+      margin-left: -100px;
     }
-    
+
     .circle3 {
-      background-color: #9f88d6;
-      width: 100px;
-      height: 100px;
+      background-color: #555555; /* Mittelgrau */
+      width: 140px;
+      height: 140px;
+      margin-top: -80px;
+      margin-left: -80px;
+    }
+
+    .circle4 {
+      background-color: #808080; /* Neutrales Grau */
+      width: 120px;
+      height: 120px;
+      margin-top: -65px;
+      margin-left: -65px;
+    }
+
+    .circle5 {
+      background-color: #aaaaaa; /* Helles Grau */
+      width: 90px;
+      height: 90px;
       margin-top: -50px;
       margin-left: -50px;
+    }
+
+    .circle6 {
+      background-color: #d5d5d5; /* Sehr helles Grau */
+      width: 80px;
+      height: 80px;
+      margin-top: -40px;
+      margin-left: -40px;
     }
 
     .preloader {
@@ -365,7 +506,34 @@ function createInteractiveUI(article) {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .input-container input {
+      padding: 5px !important;
+      margin-right: 10px;
+      border: 1px solid rgb(204, 204, 204) !important;
+      border-radius: 5px !important;
+      background: #ececec !important;
+      color: var(--bg02) !important;
+    }
+
+    .input-container input::placeholder {
+      color: var(--bg02) !important;
+    }
+
+    .input-container button {
+      color: var(--bg02) !important;
+      padding: 5px 10px !important;
+      background-color: #ececec !important;
+      border: 1px solid rgb(204, 204, 204) !important;
+      border-radius: 5px !important;
+      cursor: pointer !important;
+    }
+
+    .input-container {
+      margin-top: 100px !important;
+    }
   `;
+
   document.head.appendChild(style);
   const circles = document.querySelectorAll('.circle');
   const containerCircles = document.querySelector('.container_circles');
@@ -373,6 +541,13 @@ function createInteractiveUI(article) {
 
   circles.forEach(circle => {
     circle.addEventListener('click', () => {
+      // Debugging statement
+      // console.log('Circle clicked:', circle); 
+      document.querySelectorAll('.circle').forEach(c => c.classList.remove('selected'));
+      circle.classList.add('selected');
+      // Debugging statement
+      // console.log('Selected class added:', circle.classList.contains('selected')); 
+
       if (!document.querySelector('.input-container')) {
         const inputContainer = document.createElement('div');
         inputContainer.className = 'input-container';
@@ -384,11 +559,7 @@ function createInteractiveUI(article) {
 
         const inputField = document.createElement('input');
         inputField.type = 'text';
-        inputField.placeholder = 'Enter your data';
-        inputField.style.padding = '10px';
-        inputField.style.marginRight = '10px';
-        inputField.style.border = '1px solid #ccc';
-        inputField.style.borderRadius = '5px';
+        inputField.placeholder = 'z.B: 12, 32, 43, 7, 93';
 
         const sendButton = document.createElement('button');
         sendButton.textContent = 'Send';
@@ -416,60 +587,112 @@ function createInteractiveUI(article) {
           inputContainer.style.transform = 'translateY(0)';
         });
 
-        sendButton.addEventListener('click', () => {
+        sendButton.addEventListener('click', async () => {
           preloader.style.display = 'flex';
-          setTimeout(() => {
-            alert(`Data sent: ${inputField.value}`);
-            preloader.style.display = 'none';
-            inputField.value = '';
-          }, 2000);
-        });
+          containerCircles.style.display = 'none';
+      
+            const selectedCircle = document.querySelector('.circle.selected');
+            if (!selectedCircle) {
+              alert('Bitte wählen Sie einen Algorithmus aus.');
+              preloader.style.display = 'none';
+              containerCircles.style.display = 'flex';
+              return;
+            }
+            const algorithm = selectedCircle.textContent;
+            // Debugging statement
+            // console.log('Selected algorithm:', algorithm); 
 
+            const arrayInput = inputField.value;
+            const array = arrayInput
+              .split(',')
+              .map(Number)
+              .filter(num => !isNaN(num));
+              // Debugging statement
+              // console.log(array);
+
+            if (array.length === 0) {
+              alert('Bitte ein gültiges Array eingeben.');
+              preloader.style.display = 'none';
+              containerCircles.style.display = 'flex';
+              return;
+            }
+
+            const steps = await sendUserChoice(algorithm, array);
+            // Debugging statement	
+            // console.log('Steps:', steps); 
+
+            preloader.style.display = 'none';
+
+            if (steps) {
+              visualizeUserChoice(steps, article);
+            }
+        
+        });
       }
     });
   });
 
+  // Initialisiere die Animationen für die Kreise
+  gsap.set(circles, { scale: 0, opacity: 0 });
 
-gsap.set(circles, { scale: 0 });
-gsap.timeline()
- .to(circles, {
-   scale: 1,
-   opacity: 1,
-   duration: 1,
-   stagger: 0.2,
-   ease: 'power1.inOut',
- });
+  // Einführende Animation
+  gsap.timeline()
+    .to(circles, {
+      scale: 1,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power1.inOut',
+    });
 
+  circles.forEach(circle => {
+    // Hover-Animationen
+    circle.addEventListener('mouseenter', () => {
+      gsap.to(circle, { 
+        scale: 1.5, 
+        duration: 0.3, 
+        ease: 'power2.out',
+        // Verhindert Konflikte
+        overwrite: true 
+      });
+    });
 
-circles.forEach(circle => {
- circle.addEventListener('mouseenter', () => {
-   gsap.to(circle, { scale: 1.5, duration: 0.3 });
- });
- circle.addEventListener('mouseleave', () => {
-   gsap.to(circle, { scale: 1, duration: 0.3 });
- });
-});
+    circle.addEventListener('mouseleave', () => {
+      gsap.to(circle, { 
+        scale: 1, 
+        duration: 0.3, 
+        ease: 'power2.out',
+        // Verhindert Konflikte
+        overwrite: true 
+      });
+    });
 
+    // Klick-Animationen
+    circle.addEventListener('click', () => {
+      gsap.to(circles, {
+        x: () => Math.random() * 100 - 50,
+        y: () => Math.random() * 100 - 50,
+        scale: () => Math.random() * 1 + 0.5,
+        duration: 1,
+        ease: 'elastic.out(1, 0.5)',
+      });
 
-circles.forEach(circle => {
- circle.addEventListener('click', () => {
-   gsap.to(circles, {
-     x: () => Math.random() * 100 - 50,
-     y: () => Math.random() * 100 - 50,
-     scale: () => Math.random() * 1 + 0.5,
-     duration: 1,
-     ease: 'elastic.out(1, 0.5)',
-   });
- });
-});      
+      // Rückkehr zur Ausgangsposition nach einer kurzen Verzögerung
+      gsap.to(circles, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: 'power3.inOut',
+        // Zeit bis zur Rückkehr
+        delay: 1.5 
+      });
+    });
+  });
 }
 
-
-
-  
-
-
-  async function visualizer(article, url) {
+async function visualizer(article, url) {
+    // Verhindere doppelte UI-Erstellung
     if (article.querySelector(".visualization-container")) return;
   
     const container = d3.select(article)
@@ -489,7 +712,9 @@ circles.forEach(circle => {
     const steps = data;
   
     const bars = container.selectAll(".bar")
+      // Bindet die Daten des ersten Sortierschritts (steps[0]) an diese Elemente
       .data(steps[0])
+      // Erstellt neue div-Elemente für jeden Datenpunkt
       .enter()
       .append("div")
       .classed("bar", true)
@@ -509,17 +734,16 @@ circles.forEach(circle => {
     }
   }
 
-
-function findChangedIndices(currentStep, nextStep) {
-  const indices = [];
-  for (let i = 0; i < currentStep.length; i++) {
-    if (currentStep[i] !== nextStep[i]) {
-      indices.push(i);
+  // Hilfsfunktionen
+  function findChangedIndices(currentStep, nextStep) {
+    const indices = [];
+    for (let i = 0; i < currentStep.length; i++) {
+      if (currentStep[i] !== nextStep[i]) {
+        indices.push(i);
+      }
     }
+    return indices;
   }
-  return indices;
-}
-
 
   async function highlightComparison(bars, indices) {
     return new Promise(resolve => {
@@ -527,11 +751,9 @@ function findChangedIndices(currentStep, nextStep) {
         if (indices.includes(i)) return "#ececec"; 
         return "#121212";
       });
-
       setTimeout(resolve, 500); 
     });
   }
-
 
   function updateBars(bars, values) {
     bars.data(values)
@@ -539,10 +761,7 @@ function findChangedIndices(currentStep, nextStep) {
       .style("background-color", "#121212"); 
   }
 
-
-  function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms * config.algoSpeed));
 
 
   async function fetchSortData(url) {
@@ -556,8 +775,6 @@ function findChangedIndices(currentStep, nextStep) {
       return null;
     }
   }
-
-
 
 function handleNavigation() {
   const hash = window.location.hash.slice(1); 
