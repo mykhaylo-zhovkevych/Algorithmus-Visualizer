@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Archive</title>
     <style>
 
     @import 'normalize.css' layer(normalize);
@@ -66,11 +66,11 @@
     }
 
     [open]::details-content {
-        height: fit-content;
-        filter: blur(0px);
-        opacity: 1;
-        translate: 0 0;
-    }
+      height: fit-content;
+      filter: blur(0px);
+      opacity: 1;
+      translate: 0 0;
+  }
 
     summary {
         display: flex;
@@ -78,6 +78,7 @@
         cursor: pointer;
         position: relative;
         padding-block: 1rem;
+
     }
 
     summary::after {
@@ -92,9 +93,10 @@
     }
 
     [data-theme='dark'] summary::after {
-        filter: invert(1);
+        filter: invert(-1);
     }
 
+  
     @media (prefers-color-scheme: dark) {
         summary::after {
         filter: invert(1);
@@ -121,87 +123,95 @@
         margin: 0;
     }
 
-
-  html {
-    color-scheme: light dark;
-  }
-
-
-  ::view-transition-old(root) {
-    animation: none;
-  }
-  ::view-transition-new(root) {
-    animation: open calc(var(--duration) * 1s);
-    z-index: 2;
-    /* clip-path: inset(0 0 0 0); */
-    clip-path: polygon(
-      -10% 0%,
-      110% 0%,
-      110% 50%,
-      -10% 50%,
-      -10% 50%,
-      110% 50%,
-      110% 100%,
-      -10% 100%
-    );
-  }
-  @keyframes open {
-    0% {
-      clip-path: polygon(
-        -10% 0%,
-        110% 0%,
-        110% 0%,
-        -10% 0%,
-        -10% 100%,
-        110% 100%,
-        110% 100%,
-        -10% 100%
-      );
+  
+    ::view-transition-new(root) {
+      animation: fadeInScale calc(var(--duration) * 5s);
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0.8);
     }
+  
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
   }
 }
-
-
-    </style>
+</style>
 </head>
 <body>
-    <div class="list">
-        <details name="accordion">
-          <summary>Exclusive</summary>
-          <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            et sed consectetur aperiam repellendus, accusantium, facere id earum
-            omnis autem aspernatur perferendis labore ad obcaecati eveniet quasi
-            fuga nemo qui.</span>
-            <div>hallo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis labore iure ipsa veritatis ut aut vero esse ratione alias sed.
-            </div>
-            <div>hallo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis labore iure ipsa veritatis ut aut vero esse ratione alias sed.
-            </div>
-            <div>hallo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis labore iure ipsa veritatis ut aut vero esse ratione alias sed.
-            </div>
-            <div>hallo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis labore iure ipsa veritatis ut aut vero esse ratione alias sed.
-            </div>
-          
-        </details>
-        <details name="accordion">
-          <summary>Animated Accordion</summary>
-          <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            et sed consectetur aperiam repellendus, accusantium, facere id earum
-            omnis autem aspernatur perferendis labore ad obcaecati eveniet quasi
-            fuga nemo qui.</span
-          >
-        </details>
-        <details name="accordion">
-          <summary>Pattern</summary>
-          <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            et sed consectetur aperiam repellendus, accusantium, facere id earum
-            omnis autem aspernatur perferendis labore ad obcaecati eveniet quasi
-            fuga nemo qui.</span
-          >
-        </details>
-    </div>
-    
+  <div class="list">
+    <details name="accordion">
+      <summary>Sortieralgorithmus Übersicht</summary>
+      
+      <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, corrupti?</span>
+      <div>
+        Die Daten werden analysiert und in bestimmter Reihenfolge dargestellt. Für eine anschauliche Visualisierung verwenden Sie ein Array mit 15 unterschiedlichen Zahlen.
+      </div>
+      <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, corrupti?</span>
+
+    </details>
+
+    <details name="accordion">
+      <summary>Bubble Sort</summary>
+      <div>
+        Ein einfacher Vergleichsalgorithmus, bei dem benachbarte Elemente im Array wiederholt vertauscht werden, wenn sie in der falschen Reihenfolge sind. Dies wird so lange wiederholt, bis das gesamte Array sortiert ist.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Insertion Sort</summary>
+      <div>
+        Ein Algorithmus, bei dem Elemente eines Arrays einzeln betrachtet und in die richtige Position in einem bereits sortierten Teil des Arrays eingefügt werden.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Merge Sort</summary>
+      <div>
+        Ein effizienter, rekursiver Algorithmus, der das Array in kleinere Teile aufteilt, diese sortiert und anschliessend die sortierten Teile zu einem vollständigen Array zusammenführt.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Quick Sort</summary>
+      <div>
+        Ein schneller, teilungsbasierter Algorithmus, der ein sogenanntes Pivot-Element wählt und das Array so aufteilt, dass kleinere Werte links und grössere Werte rechts vom Pivot stehen. Anschliessend wird der Prozess rekursiv wiederholt.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Stalin Sort</summary>
+      <div>
+        Ein humoristischer Algorithmus, der Elemente entfernt, die nicht in aufsteigender Reihenfolge sind. Am Ende bleibt nur ein "sortiertes" Array, da unpassende Werte einfach eliminiert werden.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Lineare Suche</summary>
+      <div>
+        Ein einfacher Suchalgorithmus, bei dem jedes Element des Arrays nacheinander überprüft wird, bis das gesuchte Element gefunden oder das Ende des Arrays erreicht ist.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Binäre Suche</summary>
+      <div>
+        Ein effizienter Suchalgorithmus, der in einem sortierten Array arbeitet. Es wird wiederholt das mittlere Element überprüft, und das Suchgebiet wird auf die linke oder rechte Hälfte eingeschränkt, je nachdem, ob der gesuchte Wert kleiner oder grösser ist.
+      </div>
+    </details>
+
+    <details name="accordion">
+      <summary>Ternäre Suche</summary>
+      <div>
+        Ein Suchalgorithmus, der ein sortiertes Array in drei Teile aufteilt. Es überprüft zwei Trennpunkte gleichzeitig und entscheidet, in welchem Drittel der gesuchte Wert liegt, wodurch der Suchbereich schneller eingegrenzt wird.
+      </div>
+    </details>
+  </div>
 </body>
 </html>

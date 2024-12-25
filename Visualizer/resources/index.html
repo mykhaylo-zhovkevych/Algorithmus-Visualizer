@@ -3,29 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <title>Algorithmus-Visualizer</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style02.css" />
+    <link rel="stylesheet" href="MainStyle.css"/>
+    <link rel="stylesheet" href="UtilStyle.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
   </head>
-
   <body>
-
-
     <div popover="auto" id="menu">
       <div class="content">
         <!-- Popup Window mit Search und Links -->
         <div class="content__content">
           <div class="heading">
-            <input type="search" placeholder="What are you searching for?" />
+            <input type="search" placeholder="Wonach suchen Sie?" />
           </div>
-          <hr />
+          <hr/>
           <div class="links">
             <nav>
-              <h3>Links</h3>
-              ...
-              <h3>Socials</h3>
+              <h3>Thema</h3>
               <ul>
                 <li>
                   <a> 
@@ -35,19 +29,69 @@
                     <span>X</span>
                   </a>   
                 </li>
-
                 <li>
-                
+                  <a> 
+                    <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <title>X</title>
+                      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /> </svg>
+                    <span>X</span>
+                  </a>   
                 </li>
-
-              
+                <li>
+                  <a> 
+                    <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <title>X</title>
+                      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /> </svg>
+                    <span>X</span>
+                  </a>   
+                </li>
+              </ul>
+                <h3>Auxiliar Material</h3>
+                <ul>
+                  <li>
+                    <a> 
+                      <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>X</title>
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /> </svg>
+                      <span>X</span>
+                    </a>   
+                  </li>
+             
+                  <li>
+                    <a> 
+                      <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>X</title>
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /> </svg>
+                      <span>X</span>
+                    </a>   
+                  </li>
+  
+                  <li>
+                    <a> 
+                      <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>X</title>
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /> </svg>
+                      <span>X</span>
+                    </a>   
+                  </li>
+                </ul>
+                <h3>Source Code</h3>
+                <ul>
+                <li>
+                  <a href="https://github.com/mykhaylo-zhovkevych/Algorithmus-Visualizer" target="_blank" rel="noopener noreferrer"> 
+                    <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <title>GitHub</title>
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.807 1.304 3.495.997.108-.776.418-1.304.763-1.604-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.467-2.381 1.235-3.221-.123-.303-.535-1.523.117-3.176 0 0 1.007-.322 3.301 1.23.957-.266 1.984-.399 3.003-.404 1.019.005 2.046.138 3.005.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.805 5.624-5.475 5.921.43.37.814 1.096.814 2.21 0 1.595-.014 2.877-.014 3.267 0 .319.218.694.825.577C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                    <span>GitHub</span>
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
         </div>
-
         <!-- Icons Transaction from Popup -->
-         <!-- purpose only for animation -->
+        <!-- purpose only for animation -->
         <ul aria-hidden="true">
           <!-- Home Html -->
           <li style="--i: 0">
@@ -61,7 +105,6 @@
           <li style="--i: 2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"/><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 002-2v-6l-3.4-6.9A2 2 0 0016.8 4H7.2a2 2 0 00-1.8 1.1z"/></svg> 
           </li>
-
           <!-- Open/Close Button -->
           <li style="--i: 4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -69,7 +112,6 @@
         </ul>
       </div>
     </div>
-
     <!-- Icons Outside static -->
     <nav class="nav" aria-label="Main Navigation">
         <ul>
@@ -79,7 +121,6 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </a>
           </li>
-          
           <!-- Dashboard Html -->
           <li>
             <a href="#algorithms" aria-label="Settings">
@@ -92,7 +133,6 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"/><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 002-2v-6l-3.4-6.9A2 2 0 0016.8 4H7.2a2 2 0 00-1.8 1.1z"/></svg>
             </a>
           </li>
-
           <!-- Open/Close Menu Button -->
           <li>
             <button popovertarget="menu" popovertargetaction="toggle" aria-label="Open Menu">
@@ -101,17 +141,8 @@
             </button>
           </li>
         </ul>
-      </nav>
-
-
-
-  <!-- diese Elemnet soll für erste SVG verantwörtlich sein -->
-  <!-- Home Html mit Begrüssung -->
-   
+    </nav>
     <div id="page-container"></div>
-    
-
-
     <script type="module" src="script.js"></script>
   </body>
 </html>

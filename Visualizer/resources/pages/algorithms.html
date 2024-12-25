@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Algorithms</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -42,9 +41,9 @@
            scroll-behavior: smooth;
            scroll-padding-inline: calc(50vw - (var(--card-width) * 0.5));
       }
-      
-      .main ul::after {
-        content: "This is the start lorem >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>";
+
+      .main ul::before {
+        content: "Hier finden Sie eine Übersicht über verschiedene Sortier- und Suchalgorithmen. Im ersten Bereich können Sie eigene Daten mit einem Algorithmus testen oder vorgefertigte Beispiele ansehen, um die Funktionsweise der Algorithmen besser zu verstehen";	
         text-align: center;
         color: var(--bg);
         font-size: 1.5rem;
@@ -57,8 +56,8 @@
         flex-wrap: wrap;
     }
 
-      .main ul::before {
-        content: "This is the start lorem >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>";
+      .main ul::after {
+        content: "Dank dieser Visualisierung lässt sich die Funktionsweise der Algorithmen besser verstehen und nachvollziehen. Ohne zuvor die theoretischen Grundlagen zu kennen, wird es jedoch schwierig sein, die Algorithmen vollständig zu begreifen";
         text-align: center;
         color: var(--bg);
         font-size: 1.5rem;
@@ -202,13 +201,6 @@
         transition: height 0.5s ease; /* Animation für Höhenänderung */
       }
 
-      
-      
-      .bar:hover {
-        background-color: orange; /* Farbe beim Hover */
-      }
-
-
 
       .article-user {
 
@@ -227,78 +219,86 @@
 
       }
 
-
-
-
-      </style>
-
-   
+</style>   
 </head>
 <body>
-
   <div class="main">
       <div class="horizontal-sliders">
         <ul>
-
           <li id="zero" class="slide">
             <article class="article-user">
               <div class="info-article">
-                <h1>Sortieralgorithmus 00</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Sortieralgorithmus Übersicht</h1>
+                <p>Die Daten werden analysiert und in bestimmter Reihenfolge dargestellt. Für eine anschauliche Visualisierung verwenden Sie ein Array mit 15 unterschiedlichen Zahlen.</p>
               </div>
             </article>
           </li>
-
           <li id="one" class="slide">
             <article>
               <div class="info-article">
-                <h1>Sortieralgorithmus 01</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Bubble Sort</h1>
+                <p>Ein einfacher Vergleichsalgorithmus, bei dem benachbarte Elemente im Array wiederholt vertauscht werden, wenn sie in der falschen Reihenfolge sind. Dies wird so lange wiederholt, bis das gesamte Array sortiert ist.</p>
               </div>
             </article>
           </li>
           <li id="two" class="slide">
             <article>
               <div class="info-article">
-                <h1>Sortieralgorithmus 02</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Insertion Sort</h1>
+                <p>Ein Algorithmus, bei dem Elemente eines Arrays einzeln betrachtet und in die richtige Position in einem bereits sortierten Teil des Arrays eingefügt werden.</p>
               </div>
             </article>
           </li>
           <li id="three" class="slide">
             <article>
               <div class="info-article">
-                <h1>Sortieralgorithmus 03</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Merge Sort</h1>
+                <p>Ein effizienter, rekursiver Algorithmus, der das Array in kleinere Teile aufteilt, diese sortiert und anschliessend die sortierten Teile zu einem vollständigen Array zusammenführt.</p>
               </div>
             </article>
           </li>
           <li id="four" class="slide">
             <article>
               <div class="info-article">
-                <h1>Sortieralgorithmus 04</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Quick Sort</h1>
+                <p>Ein schneller, teilungsbasierter Algorithmus, der ein sogenanntes Pivot-Element wählt und das Array so aufteilt, dass kleinere Werte links und grössere Werte rechts vom Pivot stehen. Anschliessend wird der Prozess rekursiv wiederholt.</p>
               </div>
             </article>
           </li>
           <li id="five" class="slide">
             <article>
               <div class="info-article">
-                <h1>Sortieralgorithmus 05</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ut deleniti labore. Aliquam quos labore tempore at ipsum aperiam tempora?</p>
-                <!-- <img src="imgs/imgs.jpg" alt="404" width="100px" height="100px"> -->
+                <h1>Stalin Sort</h1>
+                <p>Ein humoristischer Algorithmus, der Elemente entfernt, die nicht in aufsteigender Reihenfolge sind. Am Ende bleibt nur ein "sortiertes" Array, da unpassende Werte einfach eliminiert werden.</p>
+              </div>
+            </article>
+          </li>
+          <li id="six" class="slide">
+            <article>
+              <div class="info-article">
+                <h1>Lineare Suche</h1>
+                <p>Ein einfacher Suchalgorithmus, bei dem jedes Element des Arrays nacheinander überprüft wird, bis das gesuchte Element gefunden oder das Ende des Arrays erreicht ist.</p>
+              </div>
+            </article>
+          </li>
+          <li id="seven" class="slide">
+            <article>
+              <div class="info-article">
+                <h1>Binäre Suche</h1>
+                <p>Ein effizienter Suchalgorithmus, der in einem sortierten Array arbeitet. Es wird wiederholt das mittlere Element überprüft, und das Suchgebiet wird auf die linke oder rechte Hälfte eingeschränkt, je nachdem, ob der gesuchte Wert kleiner oder grösser ist.</p>
+              </div>
+            </article>
+          </li>
+          <li id="eight" class="slide">
+            <article>
+              <div class="info-article">
+                <h1>Ternäre Suche</h1>
+                <p>Ein Suchalgorithmus, der ein sortiertes Array in drei Teile aufteilt. Es überprüft zwei Trennpunkte gleichzeitig und entscheidet, in welchem Drittel der gesuchte Wert liegt, wodurch der Suchbereich schneller eingegrenzt wird.</p>
               </div>
             </article>
           </li>
         </ul>
       </div>
   </div>
-
-
 </body>
 </html>

@@ -27,15 +27,15 @@ const secondWindow = new Pane({
     expanded: false,
 });
 
-const thirdWindow = new Pane({
+/* const thirdWindow = new Pane({
     title: 'Config ...',
     expanded: false,
-});
+}); */
 
 // Dynamische Hinzufügen von Elementen in den DOM 
 paneContainer.appendChild(ctrl.element);
 paneContainer.appendChild(secondWindow.element);
-paneContainer.appendChild(thirdWindow.element);
+/* paneContainer.appendChild(thirdWindow.element); */
 
 // FP reine Funktion, die den globalen Zustand der App synchronisiert
 // Ziel von diese Funktion ist die User-App mit code config zu synchronisiert
