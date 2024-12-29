@@ -223,11 +223,13 @@ function scrollToCenter(article) {
 // Array mit den URLs der Artikel
 const articleURLs = [
   { id: 0, url: 'http://localhost:8080/api/userchoice' },
-  { id: 1, url: 'http://localhost:8080/api/bubblesort' }, 
-  { id: 2, url: 'http://localhost:8080/api/quicksort' },
+  { id: 1, url: 'http://localhost:8080/api/bubblesort' },
+  { id: 2, url: 'http://localhost:8080/api/insertionsort' }, 
   { id: 3, url: 'http://localhost:8080/api/mergesort' },
-  { id: 4, url: 'http://localhost:8080/api/insertionsort' },
-  { id: 5, url: 'http://localhost:8080/api/selectionsort' }
+  { id: 4, url: 'http://localhost:8080/api/quicksort' },
+  { id: 5, url: 'http://localhost:8080/api/linearsuche' },
+  { id: 6, url: 'http://localhost:8080/api/binaeresuche' },
+  { id: 7, url: 'http://localhost:8080/api/ternaeresuche' }
 ];
 
 function initArticleExpansion() {
@@ -269,6 +271,21 @@ async function handleArticleExpansion(article, url, articleId) {
         if (!isExpanded) {
           scrollToCenter(article);
           createInteractiveUI(article); 
+        }
+      }
+    });
+  } else if (articleId > 5) {
+
+    console.log('Article ID:', articleId);
+    gsap.to(article, {
+      duration: 0.5,
+      height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
+      width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",
+      ease: "power2.in",
+      onComplete: async () => {
+        if (!isExpanded) {
+          scrollToCenter(article);
+          await visualizeSuche(article, url);
         }
       }
     });
@@ -626,7 +643,6 @@ function createInteractiveUI(article) {
             if (steps) {
               visualizeUserChoice(steps, article);
             }
-        
         });
       }
     });
@@ -689,6 +705,61 @@ function createInteractiveUI(article) {
       });
     });
   });
+}
+
+// Diese Funktion visualisiert schon gefundenen Elemente in der Suche, wird nicht etwas anderes gemacht
+async function visualizeSuche(article, url) {
+  if (article.querySelector(".visualization-container")) return;
+
+  const data = await fetchSucheData(url); 
+  if (!data) return;
+
+  // wie wird hier die Data von Backend herausgeholt
+  const initialArray = data.initialArray;
+  const steps = data.steps;
+
+  const container = d3.select(article)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("align-items", "flex-end")
+    .style("gap", "5px")
+    .style("background-color", "#FFFFFF")
+    .style("border-radius", "21px");
+
+  // Phase 1: Alle Zahlen anzeigen
+  const bars = container.selectAll(".bar")
+    .data(initialArray)
+    .enter()
+    .append("div")
+    .classed("bar", true)
+    .style("background-color", "#121212")
+    .style("flex", "1")
+    .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+  // Kurze Pause nach Initialisierung
+  await delay(1000);
+
+  // Phase 2: Schrittweise Suche
+  for (const step of steps) {
+    const { checkedElements, currentIndex, found } = step;
+
+    // d = Die Data von aktuell Element und i = Index von aktuell Element 
+    bars.data(checkedElements)
+      .style("background-color", (d, i) => {
+        // Ziel gefunden
+        if (i === currentIndex && found) return "green";
+        // Aktuell überprüft 
+        if (i === currentIndex) return "red";
+        // Standardfarbe 
+        return "#121212"; 
+      })
+      .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+    await delay(500);
+  }
 }
 
 async function visualizer(article, url) {
@@ -763,7 +834,7 @@ async function visualizer(article, url) {
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms * config.algoSpeed));
 
-
+  /* Identische Funktionen, es sollte später kombiniert werden, aber für den Moment kann es so bleiben. */
   async function fetchSortData(url) {
     try {
       const response = await fetch(url);
@@ -773,6 +844,19 @@ async function visualizer(article, url) {
     } catch (err) {
       console.error('Fehler:', err);
       return null;
+    }
+  }
+  async function fetchSucheData(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
     }
   }
 

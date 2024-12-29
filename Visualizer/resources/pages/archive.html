@@ -20,10 +20,9 @@
         0.1914 43.74%, 0.2499 49.99%,
         0.3164 56.25%, 0.3906 62.5%, 0.5625 75%,
         0.7656 87.5%, 1 100%
-    );
+       );
     }
     
-
     summary {
         width: 100%;
         padding-block: 1rem;
@@ -70,7 +69,7 @@
       filter: blur(0px);
       opacity: 1;
       translate: 0 0;
-  }
+    }
 
     summary {
         display: flex;
@@ -79,6 +78,18 @@
         position: relative;
         padding-block: 1rem;
 
+    }
+
+    .list {
+      width: auto;
+      height: 100vh;
+      overflow-y: auto;
+      mask: linear-gradient(#0000, #fff 10rem calc(80% - 20rem), #0000);
+      padding-top: 30%;
+    }
+
+    .list::-webkit-scrollbar {
+      display: none; 
     }
 
     summary::after {
@@ -105,7 +116,7 @@
 
     details[open] summary::after {
         scale: -1;
-    }
+        }
     }
 
     @layer base {
@@ -123,7 +134,6 @@
         margin: 0;
     }
 
-  
     ::view-transition-new(root) {
       animation: fadeInScale calc(var(--duration) * 5s);
       z-index: 2;
@@ -140,72 +150,125 @@
         opacity: 1;
         transform: scale(1);
       }
+    }
   }
-}
 </style>
 </head>
 <body>
   <div class="list">
     <details name="accordion">
       <summary>Sortieralgorithmus Übersicht</summary>
-      
-      <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, corrupti?</span>
+      <span>Hier wird eine detaillierte Erklärung der verschiedenen Algorithmen bereitgestellt.</span>
       <div>
-        Die Daten werden analysiert und in bestimmter Reihenfolge dargestellt. Für eine anschauliche Visualisierung verwenden Sie ein Array mit 15 unterschiedlichen Zahlen.
+        Jeder Algorithmus wird mit einem kurzen Codebeispiel veranschaulicht, wobei einzelne Teile des Codes direkt unter dem Beispiel weiter erklärt werden.
       </div>
-      <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, corrupti?</span>
+      <span>
 
+      </span>
     </details>
-
-    <details name="accordion">
+    <details>
       <summary>Bubble Sort</summary>
+      <span><strong>Beschreibung:</strong></span>
       <div>
-        Ein einfacher Vergleichsalgorithmus, bei dem benachbarte Elemente im Array wiederholt vertauscht werden, wenn sie in der falschen Reihenfolge sind. Dies wird so lange wiederholt, bis das gesamte Array sortiert ist.
+        Ein einfacher Vergleichsalgorithmus, bei dem benachbarte Elemente im Array wiederholt vertauscht werden, 
+        wenn sie in der falschen Reihenfolge sind. Dies wird so lange wiederholt, bis das gesamte Array sortiert ist.
+      </div>
+      <span><strong>Code (OOP):</strong></span>
+      <div>
+        <pre><code>
+  public class BubbleSortOOP {
+      public void sort(int[] array) {
+          int n = array.length;
+          for (int i = 0; i < n - 1; i++) {
+              for (int j = 0; j < n - i - 1; j++) {
+                  if (array[j] > array[j + 1]) {
+                      // Swap elements
+                      int temp = array[j];
+                      array[j] = array[j + 1];
+                      array[j + 1] = temp;
+                  }
+              }
+          }
+      }
+  }
+        </code></pre>
+      </div>
+      <span><strong>Code (FP):</strong></span>
+      <div>
+        <pre><code>
+  import java.util.Arrays;
+  import java.util.stream.IntStream;
+  
+  public class BubbleSortFP {
+      public static int[] sort(int[] array) {
+          int[] sortedArray = Arrays.copyOf(array, array.length);
+          IntStream.range(0, sortedArray.length - 1)
+                   .forEach(i -> IntStream.range(0, sortedArray.length - i - 1)
+                       .forEach(j -> {
+                           if (sortedArray[j] > sortedArray[j + 1]) {
+                               // Swap elements
+                               int temp = sortedArray[j];
+                               sortedArray[j] = sortedArray[j + 1];
+                               sortedArray[j + 1] = temp;
+                           }
+                       }));
+          return sortedArray;
+      }
+  }
+        </code></pre>
+      </div>
+      <span><strong>Erklärung:</strong></span>
+      <div>
+        <p><strong>OOP-Ansatz:</strong> Der Algorithmus wird in einer Klasse gekapselt, und die Methode <code>sort</code> verarbeitet das Array. Dieser Ansatz betont die Strukturierung und Wiederverwendbarkeit.</p>
+        <p><strong>FP-Ansatz:</strong> Funktionale Programmierung wird durch Streams und Lambdas erreicht. Die ursprüngliche Reihenfolge bleibt erhalten, indem eine Kopie des Arrays erstellt wird, was Unveränderlichkeit fördert.</p>
+      <span>
+        
+      </span>
       </div>
     </details>
-
     <details name="accordion">
       <summary>Insertion Sort</summary>
+      <span>
+        
+      </span>
       <div>
         Ein Algorithmus, bei dem Elemente eines Arrays einzeln betrachtet und in die richtige Position in einem bereits sortierten Teil des Arrays eingefügt werden.
       </div>
+      
+      <span>
+        
+      </span>
     </details>
-
     <details name="accordion">
       <summary>Merge Sort</summary>
       <div>
         Ein effizienter, rekursiver Algorithmus, der das Array in kleinere Teile aufteilt, diese sortiert und anschliessend die sortierten Teile zu einem vollständigen Array zusammenführt.
       </div>
     </details>
-
     <details name="accordion">
       <summary>Quick Sort</summary>
       <div>
         Ein schneller, teilungsbasierter Algorithmus, der ein sogenanntes Pivot-Element wählt und das Array so aufteilt, dass kleinere Werte links und grössere Werte rechts vom Pivot stehen. Anschliessend wird der Prozess rekursiv wiederholt.
       </div>
     </details>
-
     <details name="accordion">
       <summary>Stalin Sort</summary>
       <div>
         Ein humoristischer Algorithmus, der Elemente entfernt, die nicht in aufsteigender Reihenfolge sind. Am Ende bleibt nur ein "sortiertes" Array, da unpassende Werte einfach eliminiert werden.
       </div>
     </details>
-
     <details name="accordion">
       <summary>Lineare Suche</summary>
       <div>
         Ein einfacher Suchalgorithmus, bei dem jedes Element des Arrays nacheinander überprüft wird, bis das gesuchte Element gefunden oder das Ende des Arrays erreicht ist.
       </div>
     </details>
-
     <details name="accordion">
       <summary>Binäre Suche</summary>
       <div>
         Ein effizienter Suchalgorithmus, der in einem sortierten Array arbeitet. Es wird wiederholt das mittlere Element überprüft, und das Suchgebiet wird auf die linke oder rechte Hälfte eingeschränkt, je nachdem, ob der gesuchte Wert kleiner oder grösser ist.
       </div>
     </details>
-
     <details name="accordion">
       <summary>Ternäre Suche</summary>
       <div>
