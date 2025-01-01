@@ -12,7 +12,7 @@ public class BubbleSortService {
 
     public List<List<Integer>> generateBubbleSortSteps(List<Integer> array) {
         // Funktionaler Bubble-Sort: Ziel ist es, alle Zustände des Sortierprozesses zu speichern, 
-        // ohne die ursprüngliche Eingabeliste zu verändern.
+        // ohne die ursprüngliche Eingabeliste zu verändern
     
         // Die äussere Schleife läuft so oft, wie wir benötigen, um die Liste vollständig zu sortieren
         // Beispiel: Für eine Liste mit 5 Zahlen läuft sie 4-mal
@@ -40,7 +40,7 @@ public class BubbleSortService {
                                 .forEach(j -> {
                                     // Der letzte Zustand der Liste
                                     // updatedSteps.size() - 1 gibt den Index des letzten Elements zurück
-                                    // holt die Liste (den Zustand), die zuletzt hinzugefügt wurde.                
+                                    // holt die Liste (den Zustand), die zuletzt hinzugefügt wurde           
                                     List<Integer> currentArray = updatedSteps.get(updatedSteps.size() - 1);
                                     // System.out.println("currentArray: " + currentArray);
     
@@ -49,12 +49,12 @@ public class BubbleSortService {
                                         // Erstelle eine neue Liste mit getauschten Elementen.
                                         List<Integer> swapped = swapElements(currentArray, j, j + 1);
     
-                                        // Speichere die neue Liste als nächsten Zustand.
+                                        // Speichere die neue Liste als nächsten Zustand
                                         updatedSteps.add(swapped);
                                     }
                                 });
     
-                        // Gib die aktualisierte Liste der Zustände zurück.
+                        // Gib die aktualisierte Liste der Zustände zurück
                         return updatedSteps;
                     },
     

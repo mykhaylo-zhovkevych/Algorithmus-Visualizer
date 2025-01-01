@@ -29,12 +29,12 @@ public class InsertionSortService {
                         int j = i - 1; // damin die Elemente vor dem Values durchsucht werden können
     
                         // Verschiebe Elemente, die grösser als der Schlüssel sind
-                        /* Solange j nicht negativ ist (j >= 0) und das aktuelle Element currentArray.get(j) grösser ist als der Schlüsselwert values, wird der Schleifenblock ausgeführt. */
+                        /* Solange j nicht negativ ist (j >= 0) und das aktuelle Element currentArray.get(j) grösser ist als der Schlüsselwert values, wird der Schleifenblock ausgeführt */
                         while (j >= 0 && currentArray.get(j) > values) { // Nicht FP: Verwendung einer Schleife
 
                             // Teil01 hier wird die Elemnet verschoben nach rechts dank j + 1 und currentArray.get(j) ist aktuelle Element
                             currentArray.set(j + 1, currentArray.get(j)); // Nicht FP: Mutation des Arrays
-                            // Reduziert den Vergleichsindex, damit das nächste Element links betrachtet wird.
+                            // Reduziert den Vergleichsindex, damit das nächste Element links betrachtet wird
                             j--; // Nicht FP: Veränderung einer Variablen
     
                             // Zwischen Zustand: Speichert den Zustand nach jeder Verschiebung

@@ -274,7 +274,23 @@ async function handleArticleExpansion(article, url, articleId) {
         }
       }
     });
-  } else if (articleId > 5) {
+  } else if (articleId === 3) {
+
+      console.log('Article ID:', articleId);
+      gsap.to(article, {
+        duration: 0.5,
+        height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
+        width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",
+        ease: "power2.in",
+        onComplete: async () => {
+          if (!isExpanded) {
+            scrollToCenter(article);
+            await visualizeMergeSort(article, url);
+          }
+        }
+      });
+    } 
+  else if (articleId === 5) {
 
     console.log('Article ID:', articleId);
     gsap.to(article, {
@@ -289,7 +305,40 @@ async function handleArticleExpansion(article, url, articleId) {
         }
       }
     });
-  } else {
+  } 
+  else if (articleId === 6) {
+
+    console.log('Article ID:', articleId);
+    gsap.to(article, {
+      duration: 0.5,
+      height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
+      width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",
+      ease: "power2.in",
+      onComplete: async () => {
+        if (!isExpanded) {
+          scrollToCenter(article);
+          await visualizeBinäreSuche(article, url);
+        }
+      }
+    });
+  } 
+  else if (articleId === 7) {
+
+    console.log('Article ID:', articleId);
+    gsap.to(article, {
+      duration: 0.5,
+      height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
+      width: isExpanded ? "clamp(300px, 50vmin, 600px)" : "90vw",
+      ease: "power2.in",
+      onComplete: async () => {
+        if (!isExpanded) {
+          scrollToCenter(article);
+          await visualizeTernäreSuche(article, url);
+        }
+      }
+    });
+  } 
+  else {
     gsap.to(article, {
       duration: 0.5,
       height: isExpanded ? "clamp(200px, 50vmin, 400px)" : "90vh",
@@ -329,20 +378,20 @@ async function sendUserChoice(algorithm, array) {
     return data;
   } catch (error) {
     console.error('Fehler beim Senden der Benutzerauswahl:', error);
-    // Erneutes Werfen des Fehlers für die aufrufende Funktion
     throw error; 
   }
 }
 
 async function visualizeUserChoice(steps, article) {
-  // Debugging statement
-  // console.log('Visualizing sorting steps:', steps); 
 
+  // article 
   const interactiveUI = article.querySelector('.interactive-ui');
   if (!interactiveUI) {
     console.error('Interactive UI container not found.');
     return;
   }
+
+  console.log(article);
 
   const existingContainer = interactiveUI.querySelector('.visualization-container');
   if (existingContainer) {
@@ -384,6 +433,118 @@ async function visualizeUserChoice(steps, article) {
   }
 }
 
+async function visualizeMergeChoice(steps, article) {
+  const interactiveUI = article.querySelector('.interactive-ui');
+  if (!interactiveUI) {
+    console.error('Interactive UI container not found.');
+    return;
+  }
+
+  const existingContainer = interactiveUI.querySelector('.visualization-container');
+  if (existingContainer) {
+    existingContainer.remove();
+  }
+
+  const container = d3.select(interactiveUI)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("flex-direction", "column")
+    .style("align-items", "center")
+    .style("gap", "5px")
+    .style("background-color", "#f9f9f9")
+    .style("padding", "20px")
+    .style("border-radius", "12px")
+    .style("border", "1px solid #e0e0e0")
+    .style("box-shadow", "0 4px 8px rgba(0, 0, 0, 0.1)");
+
+  for (let i = 0; i < steps.length; i++) {
+    const stepData = steps[i];
+
+    // Füge jeden Schritt als neue Reihe hinzu
+    const rowContainer = createRow(container, stepData);
+
+    // Animierte Änderungen, falls es vorherige Schritte gibt
+    if (i > 0) {
+      const previousStep = steps[i - 1];
+      await animateChanges(rowContainer, previousStep, stepData);
+    }
+
+    await delay(500);
+  }
+}
+  
+async function visualizeLineareSucheChoice(steps, article) {
+
+  // article 
+  const interactiveUI = article.querySelector('.interactive-ui');
+  if (!interactiveUI) {
+    console.error('Interactive UI container not found.');
+    return;
+  }
+
+  console.log(article);
+
+  const existingContainer = interactiveUI.querySelector('.visualization-container');
+  if (existingContainer) {
+    existingContainer.remove();
+  }
+
+  const container = d3.select(interactiveUI)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("align-items", "flex-end")
+    .style("gap", "5px")
+    .style("background-color", "#FFFFFF")
+    .style("border-radius", "21px");
+
+  // Phase 1: Alle Zahlen anzeigen
+  const bars = container.selectAll(".bar")
+    .data(initialArray)
+    .enter()
+    .append("div")
+    .classed("bar", true)
+    .style("background-color", "#121212")
+    .style("flex", "1")
+    .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+  // Kurze Pause nach Initialisierung
+  await delay(1000);
+
+  // Phase 2: Schrittweise Suche
+  for (const step of steps) {
+    const { checkedElements, currentIndex, found } = step;
+
+    // d = Die Data von aktuell Element und i = Index von aktuell Element 
+    bars.data(checkedElements)
+      .style("background-color", (d, i) => {
+        // Ziel gefunden
+        if (i === currentIndex && found) return "green";
+        // Aktuell überprüft 
+        if (i === currentIndex) return "red";
+        // Standardfarbe 
+        return "#121212"; 
+      })
+      .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+    await delay(500);
+  }
+}
+
+async function visualizeBinäreSucheChoice(steps, article) {
+  
+}
+
+async function visualizeTernäreSucheChoice(steps, article) {
+  
+}
+
+
 // Funktion zum Erstellen der interaktiven UI-Elemente
 function createInteractiveUI(article) {
   if (!article) {
@@ -402,7 +563,7 @@ function createInteractiveUI(article) {
 
   container.innerHTML = `
     <div class="container_circles">
-      ${['Merge Sort', 'Quick Sort', 'Bubble Sort', 'Selection Sort', 'Quick Sort', 'Insertion Sort']
+      ${['Merge Sort', 'Bubble Sort', 'Quick Sort', 'Insertion Sort', 'Lineare Suche', 'Binäre Suche', 'Ternäre Suche']
         .map((text, i) => `<div class="circle circle${i + 1}">${text}</div>`)
         .join('')}
     </div>
@@ -493,6 +654,14 @@ function createInteractiveUI(article) {
       background-color: #d5d5d5; /* Sehr helles Grau */
       width: 80px;
       height: 80px;
+      margin-top: -40px;
+      margin-left: -40px;
+    }
+      
+    .circle7 {
+      background-color:rgb(231, 231, 231); /* Sehr helles Grau */
+      width: 70px;
+      height: 70px;
       margin-top: -40px;
       margin-left: -40px;
     }
@@ -633,6 +802,17 @@ function createInteractiveUI(article) {
               containerCircles.style.display = 'flex';
               return;
             }
+            const algorithmUIConfig = {
+              "Bubble Sort": visualizeUserChoice,
+              "Quick Sort": visualizeUserChoice,
+              "Insertion Sort": visualizeUserChoice,
+              "Merge Sort": visualizeMergeChoice,
+              "Lineare Suche": visualizeLineareSucheChoice,
+              "Binäre Suche": visualizeBinäreSucheChoice,
+              "Ternäre Suche": visualizeTernäreSucheChoice,
+
+             
+            };
 
             const steps = await sendUserChoice(algorithm, array);
             // Debugging statement	
@@ -640,8 +820,10 @@ function createInteractiveUI(article) {
 
             preloader.style.display = 'none';
 
-            if (steps) {
-              visualizeUserChoice(steps, article);
+            if (algorithmUIConfig[algorithm]) {
+              algorithmUIConfig[algorithm](steps, article);
+            } else {
+              console.error("UI für den ausgewählten Algorithmus nicht definiert:", algorithm);
             }
         });
       }
@@ -707,7 +889,116 @@ function createInteractiveUI(article) {
   });
 }
 
-// Diese Funktion visualisiert schon gefundenen Elemente in der Suche, wird nicht etwas anderes gemacht
+async function visualizeTernäreSuche(article, url) {
+  if (article.querySelector(".visualization-container")) return;
+
+  const data = await fetchSucheData(url); 
+  if (!data) return;
+
+  const initialArray = data.initialArray;
+  const steps = data.steps;
+
+  const container = d3.select(article)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("align-items", "flex-end")
+    .style("gap", "5px")
+    .style("background-color", "#FFFFFF")
+    .style("border-radius", "21px");
+
+  // Phase 1: Alle Zahlen anzeigen
+  const bars = container.selectAll(".bar")
+    .data(initialArray)
+    .enter()
+    .append("div")
+    .classed("bar", true)
+    .style("background-color", "#121212")
+    .style("flex", "1")
+    .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+  await delay(1000);
+
+  // Phase 2: Schrittweise Ternäre Suche
+  for (const step of steps) {
+    const { left, right, mid1, mid2, checkedElementMid1, checkedElementMid2, found, target: stepTarget } = step;
+
+    // Alle Balken zurücksetzen
+    bars.style("background-color", "#121212");
+    bars.filter((d, i) => i < left || i > right)
+      .style("opacity", 0);
+
+    bars.filter((d, i) => i === mid1 || i === mid2)
+      .style("background-color", "red");
+
+    // Zielwert (falls gefunden) hervorheben
+    if (found) {
+      bars.filter(d => d === stepTarget)
+        .style("background-color", "green");
+    }
+    await delay(500);
+  }
+}
+
+async function visualizeBinäreSuche(article, url) {
+  if (article.querySelector(".visualization-container")) return;
+
+  const data = await fetchSucheData(url); 
+  if (!data) return;
+
+  const initialArray = data.initialArray;
+  const steps = data.steps;
+
+  const container = d3.select(article)
+    .append("div")
+    .classed("visualization-container", true)
+    .style("width", "100%")
+    .style("height", "90%")
+    .style("display", "flex")
+    .style("align-items", "flex-end")
+    .style("gap", "5px")
+    .style("background-color", "#FFFFFF")
+    .style("border-radius", "21px");
+
+  // Phase 1: Alle Zahlen anzeigen
+  const bars = container.selectAll(".bar")
+    .data(initialArray)
+    .enter()
+    .append("div")
+    .classed("bar", true)
+    .style("background-color", "#121212")
+    .style("flex", "1")
+    .style("height", d => `${(d / d3.max(initialArray)) * 90}%`);
+
+  await delay(1000);
+
+  // Phase 2: Schrittweise binäre Suche
+  for (const step of steps) {
+    const { left, right, mid, checkedElement, found } = step;
+
+    // Alle Balken zurücksetzen, aber überprüfte Balken entfernen
+    bars.style("background-color", "#121212");
+    bars.filter((d, i) => i < left || i > right)
+      .style("opacity", 0); 
+
+    
+    bars.data([checkedElement])
+      .style("background-color", "red")
+      .style("height", d => `${(d / d3.max(initialArray)) * 90}%`)
+      .style("opacity", 1);
+
+    if (found) {
+      bars.data([checkedElement])
+        .style("background-color", "green");  
+    }
+
+    await delay(500);
+  }
+}
+
+// Diese Funktion visualisiert schon gefundenen Elemente in der Lineare Suche, wird nicht etwas anderes gemacht
 async function visualizeSuche(article, url) {
   if (article.querySelector(".visualization-container")) return;
 
@@ -834,6 +1125,92 @@ async function visualizer(article, url) {
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms * config.algoSpeed));
 
+
+  async function visualizeMergeSort(article, url) {
+    // Verhindere doppelte UI-Erstellung
+    if (article.querySelector(".visualization-container")) return;
+  
+    const container = d3.select(article)
+      .append("div")
+      .classed("visualization-container", true)
+      .style("width", "100%")
+      .style("height", "90%")
+      .style("display", "flex")
+      .style("flex-direction", "column")
+      .style("align-items", "center")
+      .style("gap", "5px")
+      .style("background-color", "#f9f9f9")
+      .style("padding", "20px")
+      .style("border-radius", "12px")
+      .style("border", "1px solid #e0e0e0")
+      .style("box-shadow", "0 4px 8px rgba(0, 0, 0, 0.1)");
+  
+    const data = await fetchSortData(url);
+    if (!data) return;
+  
+    const steps = data;
+  
+    for (let i = 0; i < steps.length; i++) {
+      const stepData = steps[i];
+  
+      // Füge jeden Schritt als neue Reihe hinzu
+      const rowContainer = createRow(container, stepData);
+  
+      // Animierte Änderungen, falls es vorherige Schritte gibt
+      if (i > 0) {
+        const previousStep = steps[i - 1];
+        await animateChanges(rowContainer, previousStep, stepData);
+      }
+  
+      await delay(500);
+    }
+  }
+  
+  // Hilfsfunktion: Erstellt eine neue Reihe
+  function createRow(container, stepData) {
+    const rowContainer = container.append("div")
+      .classed("row-container", true)
+      .style("display", "flex")
+      .style("gap", "10px")
+      .style("align-items", "center");
+  
+    rowContainer.selectAll(".number-box")
+      .data(stepData)
+      .enter()
+      .append("div")
+      .classed("number-box", true)
+      .text(d => d)
+      .style("width", "40px")
+      .style("height", "40px")
+      .style("display", "flex")
+      .style("align-items", "center")
+      .style("justify-content", "center")
+      .style("background-color", "#ffffff")
+      .style("border", "1px solid #121212")
+      .style("border-radius", "8px")
+      .style("color", "#bbbcc4")
+      .style("font-weight", "bold")
+      .style("box-shadow", "0 2px 4px rgba(0, 0, 0, 0.1)");
+  
+    return rowContainer;
+  }
+  
+  // Hilfsfunktion: Animiert die Änderungen zwischen zwei Schritten
+  async function animateChanges(rowContainer, oldStep, newStep) {
+    return new Promise(resolve => {
+      rowContainer.selectAll(".number-box")
+        .data(newStep)
+        .transition()
+        .duration(400)
+        .style("background-color", (d, i) => (oldStep[i] !== newStep[i] ? "var(--bg)" : "#ffffff"))
+        .transition()
+        .duration(400)
+        .style("background-color", "#ffffff")
+        .on("end", resolve); 
+    });
+  }
+  
+  
   /* Identische Funktionen, es sollte später kombiniert werden, aber für den Moment kann es so bleiben. */
   async function fetchSortData(url) {
     try {
@@ -846,6 +1223,7 @@ async function visualizer(article, url) {
       return null;
     }
   }
+
   async function fetchSucheData(url) {
     try {
       const response = await fetch(url);

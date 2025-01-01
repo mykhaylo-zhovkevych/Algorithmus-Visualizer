@@ -6,7 +6,8 @@ public class UserChoiceRequest  {
 
     private String algorithm;
     private List<Integer> unsortedArray;
-
+    private Integer target;
+    
     /* public AlgorithmStep(List<Integer> unsortedArray) {
         this.unsortedArray = unsortedArray;
     } */
@@ -26,5 +27,13 @@ public class UserChoiceRequest  {
 
     public void setUnsortedArray(List<Integer> unsortedArray) {
         this.unsortedArray = unsortedArray;
+    }
+
+    public Integer getTarget() {
+        return target;
+    }
+
+    public void setTarget(Integer target) {
+        this.target = target;
     }
 }
