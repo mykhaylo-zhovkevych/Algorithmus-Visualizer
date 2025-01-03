@@ -232,29 +232,33 @@
         
       </span>
       <div>
-        Ein Algorithmus, bei dem Elemente eines Arrays einzeln betrachtet und in die richtige Position in einem bereits sortierten Teil des Arrays eingefügt werden.
+        Beschreibung:
+        Insertion Sort ist ein einfacher Sortieralgorithmus, der eine Liste von Elementen durch iteratives Einfügen jedes einzelnen Elements in seine richtige Position innerhalb des sortierten Teils der Liste sortiert. Er funktioniert ähnlich wie das Sortieren von Karten in der Hand.
       </div>
-      
+      <ul>
+        <li><strong>Komplexität:</strong> O(n²) im schlimmsten Fall (bei bereits sortierten Listen: O(n)).</li>
+        <li><strong>Stabil:</strong> Behält die Reihenfolge von Elementen mit gleichen Werten bei.</li>
+        <li><strong>In-place:</strong> Es wird nur wenig zusätzlicher Speicher benötigt, da die Sortierung direkt in der Eingabeliste stattfindet.</li>
+        <li><strong>Eignung:</strong> Gut für kleine Listen oder fast sortierte Daten.</li>
+      </ul>
       <span>
         
       </span>
     </details>
     <details name="accordion">
       <summary>Merge Sort</summary>
-      <div>
-        Ein effizienter, rekursiver Algorithmus, der das Array in kleinere Teile aufteilt, diese sortiert und anschliessend die sortierten Teile zu einem vollständigen Array zusammenführt.
-      </div>
       <span>
-
-      </span>
-
-      <div>
-        Die sequenziell Erklärung von Merge Sort: Beispiel-Eingabe: [4, 2, 7, 1, 5].
-      </div>
-      <div>
-        Die Methode mergeSort teilt die Liste in kleinere Teile, bis sie auf eine Ein-Element-Liste reduziert ist. Dann führt sie diese wieder zusammen. Hier ist der Ablauf:
         
-      </div>
+      </span>
+      <p><strong>Beschreibung:</strong> 
+        Merge Sort ist ein Divide-and-Conquer-Algorithmus. Er teilt die Liste rekursiv in zwei Hälften, sortiert jede Hälfte und fügt sie dann zusammen. Der Algorithmus verwendet eine zusätzliche Liste zum Mergen der Teillisten.
+      </p>
+      <ul>
+          <li><strong>Komplexität:</strong> O(n log n) im besten, schlechtesten und durchschnittlichen Fall.</li>
+          <li><strong>Nicht stabil:</strong> Der Algorithmus könnte die Reihenfolge von gleichen Elementen ändern.</li>
+          <li><strong>Externe Sortierung:</strong> Gut geeignet, um grosse Datenmengen zu sortieren, die nicht vollständig im Arbeitsspeicher gespeichert werden können.</li>
+          <li><strong>Wichtige Eigenschaft:</strong> Merge Sort hat eine stabile Laufzeit, da er immer in O(n log n) arbeitet, unabhängig von der Reihenfolge der Eingabedaten.</li>
+      </ul>
       <span>
 
       </span>
@@ -262,28 +266,76 @@
     </details>
     <details name="accordion">
       <summary>Quick Sort</summary>
-      <div>
-        Ein schneller, teilungsbasierter Algorithmus, der ein sogenanntes Pivot-Element wählt und das Array so aufteilt, dass kleinere Werte links und grössere Werte rechts vom Pivot stehen. Anschliessend wird der Prozess rekursiv wiederholt.
-      </div>
+      <span>
+        
+      </span>
+      <p><strong>Beschreibung:</strong> 
+        Quick Sort ist ein weiterer Divide-and-Conquer-Algorithmus, der ein "Pivot" (Schlüsselwert) auswählt und das Array so umordnet, dass alle Elemente kleiner als der Pivot links und alle grösseren rechts davon stehen. Der Algorithmus wird dann rekursiv auf die Teillisten angewendet.
+      </p>
+      <ul>
+          <li><strong>Komplexität:</strong> O(n log n) im besten und durchschnittlichen Fall, O(n²) im schlechtesten Fall (bei schlechtem Pivot).</li>
+          <li><strong>Stabil:</strong> Nicht stabil, da die Reihenfolge von gleichen Elementen geändert werden kann.</li>
+          <li><strong>In-place:</strong> Keine zusätzliche Speicherung nötig, da die Sortierung direkt in der Liste erfolgt.</li>
+          <li><strong>Eignung:</strong> Sehr schnell in der Praxis, wenn der Pivot gut gewählt wird (z.B. durch Zufall oder Median).</li>
+      </ul>
+      <span>
+        
+      </span>
     </details>
    
     <details name="accordion">
       <summary>Lineare Suche</summary>
-      <div>
-        Ein einfacher Suchalgorithmus, bei dem jedes Element des Arrays nacheinander überprüft wird, bis das gesuchte Element gefunden oder das Ende des Arrays erreicht ist.
-      </div>
+      <span>
+        
+      </span>
+      <p><strong>Beschreibung:</strong> 
+        Bei der linearen Suche wird jedes Element einer Liste nacheinander auf Übereinstimmung mit dem gesuchten Wert überprüft, bis entweder das Element gefunden oder das Ende der Liste erreicht ist.
+      </p>
+      <ul>
+          <li><strong>Komplexität:</strong> O(n), da jedes Element im schlimmsten Fall überprüft werden muss.</li>
+          <li><strong>Stabilität:</strong> Nicht relevant, da es keine Reihenfolge bei den Elementen gibt.</li>
+          <li><strong>Eignung:</strong> Wird oft für unsortierte Daten verwendet, wenn eine schnelle Implementierung erforderlich ist.</li>
+          <li><strong>Vorteil:</strong> Sehr einfach und erfordert keine Vorverarbeitung (wie Sortierung).</li>
+      </ul>
+      <span>
+
+      </span>
     </details>
     <details name="accordion">
       <summary>Binäre Suche</summary>
-      <div>
-        Ein effizienter Suchalgorithmus, der in einem sortierten Array arbeitet. Es wird wiederholt das mittlere Element überprüft, und das Suchgebiet wird auf die linke oder rechte Hälfte eingeschränkt, je nachdem, ob der gesuchte Wert kleiner oder grösser ist.
-      </div>
+      <span>
+        
+      </span>
+      <p><strong>Beschreibung:</strong> 
+        Binäre Suche ist ein sehr effizienter Suchalgorithmus, der auf einer sortierten Liste arbeitet. Der Algorithmus teilt die Liste immer wieder in zwei Hälften und vergleicht den gesuchten Wert mit dem mittleren Element. Die Suche wird dann in der entsprechenden Hälfte fortgesetzt.
+      </p>
+      <ul>
+          <li><strong>Komplexität:</strong> O(log n), da die Liste in jeder Iteration halbiert wird.</li>
+          <li><strong>Voraussetzung:</strong> Die Liste muss vorab sortiert sein.</li>
+          <li><strong>Nicht stabil:</strong> Da der Algorithmus nur nach einem Wert sucht, gibt es keine Problematik mit der Stabilität.</li>
+          <li><strong>Eignung:</strong> Sehr schnell für grosse sortierte Listen.</li>
+      </ul>
+      <span>
+
+      </span>
     </details>
     <details name="accordion">
       <summary>Ternäre Suche</summary>
-      <div>
-        Ein Suchalgorithmus, der ein sortiertes Array in drei Teile aufteilt. Es überprüft zwei Trennpunkte gleichzeitig und entscheidet, in welchem Drittel der gesuchte Wert liegt, wodurch der Suchbereich schneller eingegrenzt wird.
-      </div>
+      <span>
+
+      </span>
+      <p><strong>Beschreibung:</strong> 
+        Die ternäre Suche ist ähnlich wie die binäre Suche, aber anstatt die Liste in zwei Hälften zu teilen, wird sie in drei Teile aufgeteilt. Der gesuchte Wert wird mit den beiden mittleren Elementen verglichen, und die Suche wird in der entsprechenden der drei Teilmengen fortgesetzt.
+      </p>
+      <ul>
+          <li><strong>Komplexität:</strong> O(log₃ n) oder O(log n / log 3), was theoretisch besser ist als binäre Suche, aber in der Praxis nicht immer effizienter.</li>
+          <li><strong>Voraussetzung:</strong> Die Liste muss sortiert sein.</li>
+          <li><strong>Nicht stabil:</strong> Da auch hier nur nach einem Wert gesucht wird, ist Stabilität nicht relevant.</li>
+          <li><strong>Eignung:</strong> Weniger oft verwendet als binäre Suche, da der Gewinn in der Praxis minimal ist. Wird selten bevorzugt.</li>
+      </ul>
+      <span>
+
+      </span>
     </details>
   </div>
 </body>
