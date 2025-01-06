@@ -1,5 +1,15 @@
 # Dokumentation
 
+![Screenshot 2025-01-06 111636](https://github.com/user-attachments/assets/08e97c84-f8e1-4888-ab7e-1388683c829c)
+![Screenshot 2025-01-06 111653](https://github.com/user-attachments/assets/d397e02e-00ea-4622-abb2-ff2b33ea12eb)
+![Screenshot 2025-01-06 111727](https://github.com/user-attachments/assets/5e46c0c0-b934-44f2-81e5-871c226aac0a)
+![Screenshot 2025-01-06 111741](https://github.com/user-attachments/assets/90b8a0df-3d8f-43a9-8baf-7bbeda97b97c)
+![Screenshot 2025-01-06 111754](https://github.com/user-attachments/assets/487648ea-9640-4485-b483-d585a3b717fa)![Screenshot 2025-01-06 111805](https://github.com/user-attachments/assets/c697cc71-8743-4fc2-a5c1-baaea832ddc4)
+
+
+
+
+
 Eine allgemeine Dokumentation für die App, die API und die Installationsanleitung.
 
 ## **Überblick**
