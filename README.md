@@ -69,6 +69,3 @@ Das Projekt entstand aus dem Wunsch, algorithmische Konzepte auf eine intuitive 
 Die interaktive App ermöglicht es den Nutzern, die Funktionsweise von Algorithmen besser zu verstehen und sie direkt zu vergleichen.
 
 ---
-
-## **Installationsanleitung**
-
