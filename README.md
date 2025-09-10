@@ -63,6 +63,14 @@ Während der Entwicklung sind folgende Herausforderungen zu berücksichtigen:
 
 ---
 
+## **To Run COde**
+
+``` bash
+cd Algorithmus-Visualizer\Visualizer
+electron .
+```
+---
+
 ## **Projektidee**
 
 Das Projekt entstand aus dem Wunsch, algorithmische Konzepte auf eine intuitive und visuelle Weise darzustellen. 
