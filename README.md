@@ -63,7 +63,7 @@ Während der Entwicklung sind folgende Herausforderungen zu berücksichtigen:
 
 ---
 
-## **To Run COde**
+## **To Run Code**
 
 ``` bash
 cd Algorithmus-Visualizer\Visualizer
